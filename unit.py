@@ -7,11 +7,11 @@ class Measure(object):
                  self.value=value
                  self.unit=unit
 		 if self.unit=='km' or self.unit=='m':
-		    return self.measure='length'
+		    return self.measure=='length'
 		 if self.unit=='h' or self.unit=='s':
-		    return self.measure='time'
+		    return self.measure=='time'  # perche vuole il doppio uguale???
 		# this function convert the current unit into the one indicated by unitconvertion.	
-		def conversion(self, unitconversion):
+	def conversion(self, unitconversion):
          if self.unit=='m' and unitconversion=='km':
              return 0.001*self.value
          elif self.unit=='km' and unitconversion=='m':
