@@ -7,9 +7,10 @@ class Measure(object):
                  self.value=value
                  self.unit=unit
 		 if self.unit=='km' or self.unit=='m':
-		    return self.measure=='length'
+		      self.measure='length'
 		 if self.unit=='h' or self.unit=='s':
-		    return self.measure=='time'  # perche vuole il doppio uguale???
+		      self.measure='time'  
+	         return self.measure
 		# this function convert the current unit into the one indicated by unitconvertion.	
 	def conversion(self, unitconversion):
          if self.unit=='m' and unitconversion=='km':
@@ -17,9 +18,9 @@ class Measure(object):
          elif self.unit=='km' and unitconversion=='m':
              return 1000*self.value
          elif self.unit=='h' and unitconversion=='s':
-             return 60*self.value
+             return 3600*self.value
          elif self.unit=='s' and unitconversion=='h':
-             return 0.016666666666666666666666666666667*self.value
+             return 0.000277777777777777777777777777*self.value
 		# this function adds the values of self and others if they are the same unit or if they are the same measure.		 
         def add(self, others):
              if self.measure==others.measure:
@@ -29,3 +30,15 @@ class Measure(object):
                      return self.value+others.conversion(self.unit)     
              else:
                  raise ValueError('Units not summable') 				 
+	def __add__(self, other):
+                return self.add(other)
+	#def __eq__(self, other):
+           # return self.eq(other)		
+ #       def __mul__(self, other):
+  #              return self.multiply(other)
+	#def __rmul__(self, other):
+     #       return self.__mul__(other)
+        def __radd__(self, other):
+                return self.__add__(other)
+	#def __req__(self, other):
+         #   return self.__eq__(other)	
