@@ -1,25 +1,14 @@
-class Expression(object):
-        def __init__(self, terms=[]):
-            self.terms=list(terms)
-        def add(self, *others):
-            result=Expression(self.terms)
-            for another in others:
-                if type(another)==Metre and type(self)== Metre:
-                    result = another.coefficient + self.coefficient
-                elif type(another)==Kilometre and type(self)== Kilometre:
-                    result = another.coefficient + self.coefficient
-                elif type(another)==Kilometre and type(self)== Metre:
-                    result = 0.001*another.coefficient + self.coefficient
-                elif type(another)==Metre and type(self)== Kilometre:
-                    result = another.coefficient + 0.001*self.coefficient					
-                else: # raise error? Sopra pero non lo conosce il coefficient. metre.coefficient?
-                    #result = another.coefficient + 0.001*self.coefficient
-            return result
-        def multiply(self, another):
-            # Distributive law left as exercise
-            pass
-			# Definisco anche eq qua? come?
-        def __add__(self, other):
-            return self.add(other)
-		def __radd__(self, other):
-            return self.__add__(other)
+from nose.tools import assert_raises, assert_equal, assert_true, assert_false
+from unit import Measure
+
+def test_proposed():
+
+    #meters = Measure(1,"m")
+    #kilometers = Unit("length", 1e3)
+    #seconds = Unit("time", 1)
+    #minutes = Unit("time", 60)
+
+    assert_true(Measure(5,"m") == Measure(0.005,"km"))
+    assert_true(Measure(3600,"s")==Measure(1,"h"))
+    with assert_raises(IncompatibleUnitsError):
+        Measure(3,"m")+Measure(4,"s")
