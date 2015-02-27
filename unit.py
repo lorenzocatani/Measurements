@@ -7,10 +7,10 @@ class Measure(object):
                  self.value=value
                  self.unit=unit
 		 if self.unit=='km' or self.unit=='m':
-		      self.measure='length'
+		       self.measure='length'
 		 if self.unit=='h' or self.unit=='s':
-		      self.measure='time'  
-	         return self.measure
+		       self.measure='time'  
+	               return self.measure
 		# this function convert the current unit into the one indicated by unitconvertion.	
 	def conversion(self, unitconversion):
          if self.unit=='m' and unitconversion=='km':
@@ -29,16 +29,22 @@ class Measure(object):
                  else:
                      return self.value+others.conversion(self.unit)     
              else:
-                 raise ValueError('Units not summable') 				 
-	def __add__(self, other):
-                return self.add(other)
-	#def __eq__(self, other):
-           # return self.eq(other)		
- #       def __mul__(self, other):
-  #              return self.multiply(other)
-	#def __rmul__(self, other):
-     #       return self.__mul__(other)
+                 raise ValueError('Units not summable') 	
+        def multiply(self, others):
+            if self.unit==others.unit:
+                 return self.value*others.value
+            else:
+                 return self.value*others.conversion(self.unit)     
+	   				 
+	    def __add__(self, other):
+             return self.add(other)
+	    def __eq__(self, other):
+             return self.eq(other)		
+        def __mul__(self, other):
+             return self.multiply(other)
+	     def __rmul__(self, other):
+               return self.__mul__(other)
         def __radd__(self, other):
-                return self.__add__(other)
-	#def __req__(self, other):
-         #   return self.__eq__(other)	
+             return self.__add__(other)
+	     def __req__(self, other):
+              return self.__eq__(other)	

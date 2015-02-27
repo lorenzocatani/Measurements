@@ -9,6 +9,6 @@ def test_proposed():
     #minutes = Unit("time", 60)
 
     assert_true(Measure(5,"m") == Measure(0.005,"km"))
-    assert_true(Measure(3600,"s")==Measure(1,"h"))
+    assert_true(Measure(3600,"s") == Measure(1,"h"))
     with assert_raises(IncompatibleUnitsError):
-        Measure(3,"m")+Measure(4,"s")
+        Measure(3,"m").add(Measure(4,"s"))
