@@ -1,5 +1,5 @@
 
-# we define a class that takes  the value (e.g. 5) and the unit (e.g. km). It then creates the measure (length or time).
+# We define a class that takes  the value (e.g. 5), the unit (e.g. km) and the measure(length or time).
 class Measure(object):
         def __init__(self,value,unit,measure):
                 self.value=value
@@ -9,7 +9,7 @@ class Measure(object):
 		  #     self.measure='length'
 		 #if self.unit=='h' or self.unit=='s':
 		  #     self.measure='time'  
-	       #        return self.measure PERCHE SONO SBAGLIATI??
+	       #        return self.measure  This works wrong
 		# this function convert the current unit into the one indicated by unitconvertion.	
 	def conversion(self, unitconversion):
          if self.unit=='m' and unitconversion=='km':
@@ -19,8 +19,8 @@ class Measure(object):
          elif self.unit=='h' and unitconversion=='s':
              return 3600*self.value
          elif self.unit=='s' and unitconversion=='h':
-             return 0.000277777777777777777777777777*self.value
-		# this function adds the values of self and others if they are the same unit or if they are the same measure.		 
+             return 0.000277777777777777777777777777*self.value 
+		# this function adds the values of self and others if they are the same measure and if they are the same unit.		 
         def add(self, others):
              if self.measure==others.measure:
                  if self.unit==others.unit:
@@ -53,12 +53,12 @@ class Measure(object):
                      else:
                           return False
                  else:
-                     if other.value==self.conversion(other.value):
+                     if other.value==self.conversion(other.unit):
                           return True
                      else:
                           return False
              else:
                   raise TypeError('Incompatibleunits')	
-
+                  return
         def __req__(self, other):
               return self.__eq__(other)	
