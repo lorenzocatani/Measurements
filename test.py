@@ -3,12 +3,16 @@ from unit import Measure
 
 def test_proposed():
 
-    #meters = Measure(1,"m")
-    #kilometers = Unit("length", 1e3)
-    #seconds = Unit("time", 1)
-    #minutes = Unit("time", 60)
+    #metres = Measure(1,"m")
+    #kilometres = Measure(1,"km")
+    #seconds = Measure(1, "s")
+    #hours = Measure(1, "h")
 
-    assert_true(Measure(5,"m") == Measure(0.005,"km"))
+    assert_true(Measure(1,'km') == Measure(1000,'m'))
     assert_true(Measure(3600,"s") == Measure(1,"h"))
     with assert_raises(IncompatibleUnitsError):
         Measure(3,"m").add(Measure(4,"s"))
+	 
+	 
+	 
+#assert_true(5*metres == 0.005*kilometres)

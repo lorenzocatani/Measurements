@@ -1,6 +1,4 @@
-"""
-I have to create class to implement operations consistently with the units
-"""
+
 # we define a class that takes  the value (e.g. 5) and the unit (e.g. km). It then creates the measure (length or time).
 class Measure(object):
         def __init__(self,value,unit):
@@ -30,14 +28,21 @@ class Measure(object):
                      return self.value+others.conversion(self.unit)     
              else:
                  raise ValueError('Units not summable') 	
+	     def __add__(self, other):
+               return self.add(other)
+               def __radd__(self, other):
+                  return self.__add__(other)			 
+		# this function multiplies the values of self and others.				 
         def multiply(self, others):
             if self.unit==others.unit:
                  return self.value*others.value
             else:
                  return self.value*others.conversion(self.unit)     
-	   				 
-	    def __add__(self, other):
-             return self.add(other)
+        def __mul__(self, other):
+             return self.multiply(other)
+	     def __rmul__(self, other):
+               return self.__mul__(other)	
+		# define the equality function.			   
         def __eq__(self,other):
              if self.measure==other.measure:
                  if self.unit==other.unit:
@@ -52,11 +57,6 @@ class Measure(object):
                           return False
              else:
                   raise TypeError('Incompatibleunits')	
-        def __mul__(self, other):
-             return self.multiply(other)
-	     def __rmul__(self, other):
-               return self.__mul__(other)
-        def __radd__(self, other):
-             return self.__add__(other)
-	     def __req__(self, other):
+
+        def __req__(self, other):
               return self.__eq__(other)	
