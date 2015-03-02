@@ -1,14 +1,15 @@
 
 # we define a class that takes  the value (e.g. 5) and the unit (e.g. km). It then creates the measure (length or time).
 class Measure(object):
-        def __init__(self,value,unit):
-                 self.value=value
-                 self.unit=unit
-		 if self.unit=='km' or self.unit=='m':
-		       self.measure='length'
-		 if self.unit=='h' or self.unit=='s':
-		       self.measure='time'  
-	               return self.measure
+        def __init__(self,value,unit,measure):
+                self.value=value
+                self.unit=unit
+	        self.measure=measure
+		 #if self.unit=='km' or self.unit=='m':
+		  #     self.measure='length'
+		 #if self.unit=='h' or self.unit=='s':
+		  #     self.measure='time'  
+	       #        return self.measure PERCHE SONO SBAGLIATI??
 		# this function convert the current unit into the one indicated by unitconvertion.	
 	def conversion(self, unitconversion):
          if self.unit=='m' and unitconversion=='km':
@@ -27,10 +28,11 @@ class Measure(object):
                  else:
                      return self.value+others.conversion(self.unit)     
              else:
-                 raise ValueError('Units not summable') 	
+                 raise ValueError('Units not summable')
+                 return				 
 	     def __add__(self, other):
                return self.add(other)
-               def __radd__(self, other):
+             def __radd__(self, other):
                   return self.__add__(other)			 
 		# this function multiplies the values of self and others.				 
         def multiply(self, others):
@@ -39,7 +41,7 @@ class Measure(object):
             else:
                  return self.value*others.conversion(self.unit)     
         def __mul__(self, other):
-             return self.multiply(other)
+             return self.multiply(other)	 
 	     def __rmul__(self, other):
                return self.__mul__(other)	
 		# define the equality function.			   
