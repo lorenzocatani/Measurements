@@ -38,8 +38,20 @@ class Measure(object):
 	   				 
 	    def __add__(self, other):
              return self.add(other)
-	    def __eq__(self, other):
-             return self.eq(other)		
+        def __eq__(self,other):
+             if self.measure==other.measure:
+                 if self.unit==other.unit:
+                     if self.value==other.value:
+                          return True
+                     else:
+                          return False
+                 else:
+                     if other.value==self.conversion(other.value):
+                          return True
+                     else:
+                          return False
+             else:
+                  raise TypeError('Incompatibleunits')	
         def __mul__(self, other):
              return self.multiply(other)
 	     def __rmul__(self, other):
