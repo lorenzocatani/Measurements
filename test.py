@@ -1,18 +1,15 @@
-from nose.tools import assert_raises, assert_equal, assert_true, assert_false
+from nose.tools import assert_raises, assert_equal, assert_true
 from unit import Measure
 
-def test_proposed():
+def test_equalities():
+    assert_true(Measure(5,'km','length')==Measure(5000,'m','length'))
+    assert_true(Measure(3600,"s",'time') == Measure(1,"h",'time'))
+	 
+def test_bad_addition():
+    with assert_raises(TypeError):
+        Measure(3,"m",'length').add(Measure(4,"s",'time'))	 
+		
+def test_multiplication():
+    with assert_raises(TypeError):
+        Measure(3,"m",'length').multiply(Measure(4,"s",'time'))
 
-    #metres = Measure(1,"m")
-    #kilometres = Measure(1,"km")
-    #seconds = Measure(1, "s")
-    #hours = Measure(1, "h")
-
-    assert_true(Measure(1,'km') == Measure(1000,'m'))
-    assert_true(Measure(3600,"s") == Measure(1,"h"))
-    with assert_raises(IncompatibleUnitsError):
-        Measure(3,"m").add(Measure(4,"s"))
-	 
-	 
-	 
-#assert_true(5*metres == 0.005*kilometres)
